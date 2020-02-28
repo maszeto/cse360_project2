@@ -5,7 +5,7 @@
  */
 
 package cse360assign2;
-
+import java.util.*;
 /**
  * 
  * @author Matthew Szeto
@@ -38,18 +38,20 @@ public class SimpleList {
 	
 	public void add(int numToBeAdded)
 	{
-		for(int currentIndex = this.count-1; currentIndex >= 0; currentIndex--)
+		if(this.count + 1 > this.list.length)//count should never be greater than the length of the list
 		{
-			if(currentIndex != 9)
-			{
-				this.list[currentIndex+1] = this.list[currentIndex];
-			}
+			//copy current array into new array which is 50% larger
+			int newArrSize = (int) ((.5*this.list.length) + this.list.length);
+			this.list = Arrays.copyOf(this.list,newArrSize);//copies previous array values into new one
+		}
+
+		for(int currentIndex = this.count-1; currentIndex >= 0; currentIndex--)//shifts array values to a new one
+		{
+			this.list[currentIndex+1] = this.list[currentIndex];
 		}
 		this.list[0] = numToBeAdded;
-		if(this.count < 10)
-		{
-			this.count++;
-		}
+		this.count++;
+
 	}
 	
 	/**
