@@ -31,7 +31,8 @@ public class SimpleList {
 	
 	/**
 	 * This method adds an integer to index 0 of the list and shifts the 
-	 * other elements right
+	 * other elements right. If there is not enough space, the new array size
+	 * is 1.5x the old size.
 	 * @param numToBeAdded is the int to be added
 	 * @return none
 	 */
@@ -41,7 +42,7 @@ public class SimpleList {
 		if(this.count + 1 > this.list.length)//count should never be greater than the length of the list
 		{
 			//copy current array into new array which is 50% larger
-			int newArrSize = (int) ((.5*this.list.length) + this.list.length);
+			int newArrSize = ((int)(.5*this.list.length) + this.list.length);
 			this.list = Arrays.copyOf(this.list,newArrSize);//copies previous array values into new one
 		}
 
@@ -56,15 +57,24 @@ public class SimpleList {
 	
 	/**
 	 * This method removes all integers in the list with the value
-	 * numToBeRemoved
+	 * numToBeRemoved, if there is more than 25% empty space, it reduces list
+	 * size by 25%
 	 * @param numToBeRemoved is the integer to be removed
 	 * @return none
 	 */
 	
 	public void remove(int numToBeRemoved)
 	{
+
 		if(search(numToBeRemoved) >= 0)
 		{
+			double percentPresent = this.count / this.list.length;
+			if(1 - percentPresent > .25)//adjusts array size
+			{				
+				int newArrSize =(this.list.length - (int)(.25*this.list.length));
+				this.list = Arrays.copyOf(this.list,newArrSize);//copies previous array values into new one
+			}
+			
 			int indexToBeRemoved = search(numToBeRemoved);
 			for(int currentIndex = indexToBeRemoved; currentIndex < this.count - 1; currentIndex++)
 			{
