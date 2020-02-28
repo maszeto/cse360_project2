@@ -174,5 +174,29 @@ public class SimpleList {
 		}
 		return firstNum;
 	}
+	/**
+	 * This returns the last integer in the array, if the list is empty, 
+	 * it returns -1
+	 * @param None
+	 * @return lastNum is the int at the count index of the array.
+	 */	
+	public int last() {
+		int lastNum = -1;
+		if(this.list.length > 0)
+		{
+			lastNum = this.list[this.count - 1];
+		}
+		return lastNum;
+	}
+	/**
+	 * This returns the size of the array, it includes empty and 
+	 * non-empty indices
+	 * @param None
+	 * @return Returns the size of the array.
+	 */	
+	public int size() {
+		return this.list.length;
+	}
+
 	
 }
