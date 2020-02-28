@@ -1,7 +1,7 @@
 /**
  * Author: Matthew Szeto
  * Class ID: 195
- * Assignment: 1
+ * Assignment: 2
  */
 
 package cse360assign2;
@@ -9,9 +9,9 @@ import java.util.*;
 /**
  * 
  * @author Matthew Szeto
- * This class creates a simple list of up to ten elements which contains
- * methods to modify the list, including a search method, add, remove, 
- * and count and toString to display information on the list
+ * This class creates a simple list. The list size is increased by 50% when appended to or
+ * added to. The size is decreased by 25% when there is more that 25% slots in the array
+ * not used.
  *
  */
 
