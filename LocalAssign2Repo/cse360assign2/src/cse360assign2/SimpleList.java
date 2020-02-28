@@ -66,7 +66,7 @@ public class SimpleList {
 	public void remove(int numToBeRemoved)
 	{
 
-		if(search(numToBeRemoved) >= 0)
+		if((search(numToBeRemoved) >= 0) && ((this.count - 1) != 0))
 		{
 			double percentPresent = this.count / this.list.length;
 			if(1 - percentPresent > .25)//adjusts array size
@@ -126,13 +126,13 @@ public class SimpleList {
 	 * @return int the index of the integer being searched for in the list
 	 */
 	
-	public int search(int intToFind)
+	public int search(int numToFind)
 	{
 		boolean found = false;
 		int foundIndex = -1;
 		for(int index = 0; index < count(); index++)
 		{
-			if(this.list[index] == intToFind && !found)
+			if(this.list[index] == numToFind && !found)
 			{
 				found = true;
 				foundIndex = index;
@@ -141,5 +141,38 @@ public class SimpleList {
 		return foundIndex;
 	}
 	
+	/**
+	 * This appends a new integer to the end of the list, if there is not 
+	 * enough space in the array, the array length is increased by 50%. Count
+	 * is always incremented
+	 * @param numToAppend is the integer to append at the end of the list
+	 * @return None
+	 */
+	public void append(int numToAppend)
+	{
+		if(this.count + 1 > this.list.length)//count should never be greater than the length of the list
+		{
+			//copy current array into new array which is 50% larger
+			int newArrSize = ((int)(.5*this.list.length) + this.list.length);
+			this.list = Arrays.copyOf(this.list,newArrSize);//copies previous array values into new one
+		}
+
+		this.list[count] = numToAppend;//adds number to end of the list
+		this.count++;
+	}
+	/**
+	 * This returns the first integer in the array, if the list is empty, 
+	 * it returns -1
+	 * @param None
+	 * @return firstNum is the int at index 0 of the array
+	 */	
+	public int first() {
+		int firstNum = -1;
+		if(this.list.length > 0)
+		{
+			firstNum = this.list[0];
+		}
+		return firstNum;
+	}
 	
 }
